@@ -48,13 +48,22 @@ async def run_job():
 
     # Fetch news with POST
     async with httpx.AsyncClient() as client_http:
-        resp = await client_http.post(
-            NEWS_API_URL,
-            json=request_body,
-            timeout=float(TIMEOUT)
-        )
-        resp.raise_for_status()
-        data = resp.json()
+        # resp = await client_http.post(
+        #     NEWS_API_URL,
+        #     json=request_body,
+        #     timeout=float(TIMEOUT)
+        # )
+        # resp.raise_for_status()
+        # data = resp.json()
+
+        try:
+            resp = await client_http.post(NEWS_API_URL, json=request_body, timeout=float(TIMEOUT))
+            resp.raise_for_status()
+            data = resp.json()
+        except httpx.HTTPStatusError as e:
+            print(f"❌ API returned {e.response.status_code}")
+            print("Response body:", e.response.text)
+            return
 
 #     data = {
 #   "response": [
