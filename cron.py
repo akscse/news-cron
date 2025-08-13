@@ -38,6 +38,8 @@ async def run_job():
         "query": "Generate news using preference"
     }
 
+    print("Project start")
+
     # Fetch news with POST
     async with httpx.AsyncClient() as client_http:
         resp = await client_http.post(
