@@ -14,6 +14,11 @@ MONGO_URI = os.getenv("MONGO_URI")
 NEWS_API_URL = os.getenv("NEWS_API_URL")
 TIMEOUT = os.getenv("TIMEOUT")
 
+
+print("MONGO_URI", MONGO_URI)
+print("NEWS_API_URL", NEWS_API_URL)
+print("TIMEOUT", TIMEOUT)
+
 # 🚨 Fail early if variables are missing
 if not MONGO_URI:
     print("❌ ERROR: MONGO_URI is not set in .env or environment variables.")
@@ -23,6 +28,8 @@ if not NEWS_API_URL:
     print("❌ ERROR: NEWS_API_URL is not set in .env or environment variables.")
     sys.exit(1)
 
+
+print("Project start")
 
 async def run_job():
     # Connect to MongoDB
@@ -38,7 +45,6 @@ async def run_job():
         "query": "Generate news using preference"
     }
 
-    print("Project start")
 
     # Fetch news with POST
     async with httpx.AsyncClient() as client_http:
