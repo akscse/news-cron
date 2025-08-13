@@ -4,8 +4,7 @@ from datetime import datetime
 from typing import List, Optional
 
 class News(Document):
-    category: str
-    preference: str
+    preference_name: str
     heading: str
     description: str
     news_datetime: datetime  # ✅ renamed from datetime to avoid clash

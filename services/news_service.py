@@ -32,14 +32,13 @@ async def insert_news_from_api_response(api_data: dict):
     """
 
     for preference_block in api_data.get("response", []):
-        preference = preference_block.get("preference")
         agent_response = preference_block.get("agent_response", {})
         news_fetched_list = agent_response.get("news_fetched", [])
 
         # print("News_fetched list", news_fetched_list)
 
         for fetched in news_fetched_list:
-            category = fetched.get("name")
+            preference_name = fetched.get("name")
             timestamp = fetched.get("datetime")
             news_datetime = datetime.utcfromtimestamp(timestamp)
 
@@ -51,13 +50,12 @@ async def insert_news_from_api_response(api_data: dict):
 
 
                 news_data = News(
-                    category=category,
-                            preference=preference,
-                            heading=heading,
-                            description=description,
-                            news_datetime=news_datetime,
-                            image=image,
-                            src=src
+                        preference_name=preference_name,
+                        heading=heading,
+                        description=description,
+                        news_datetime=news_datetime,
+                        image=image,
+                        src=src
 
                 )
 
